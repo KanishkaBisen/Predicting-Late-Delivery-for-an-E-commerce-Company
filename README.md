@@ -1,85 +1,71 @@
 Predicting Late Deliveries in E-Commerce
+Machine learning project using the Olist dataset to predict whether an order will arrive on time or late.
+Helps businesses improve customer satisfaction by proactively flagging high-risk shipments.
 
-This project uses machine learning to predict late deliveries in Brazilian e-commerce, leveraging the Olist dataset. Timely deliveries are critical for customer satisfaction and business reputation. By identifying at-risk orders before they ship, businesses can take proactive measures to reduce delays and improve customer experience.
+✨ Overview
+Dataset: Olist e-commerce (orders, products, sellers, customers, geolocation).
 
-Project Overview:
+Goal: Predict late deliveries with ML models.
 
-Dataset: Olist e-commerce (orders, customers, sellers, products, geolocation).
-
-Objective: Predict if an order will be delivered on time or late.
-
-
-Key Steps:
-
+Approach:
 Data cleaning & preprocessing (dates, missing values, numeric features).
 
 Feature engineering:
-
 Distance between seller & customer (Haversine formula).
-
 Product bulkiness (volume × weight).
-
 Holiday & weekend flags.
-
 Multiple sellers/items per order.
-
 Logistic delays (late to carrier).
-
 Exploratory Data Analysis (EDA).
+Model training & evaluation with cross-validation.
 
-Machine learning model training & evaluation.
+🧠 Models & Results
 
-
-Models Tested:
-
-Logistic Regression (baseline): AUC 0.64, Recall 0.59, low precision.
-
-Random Forest: AUC 0.79, Precision 0.83, but Recall only 0.20.
-
-XGBoost (Best Model): AUC 0.78, Recall 0.66, Precision 0.19.
-
-XGBoost selected for best balance between recall and overall predictive power.
+| Model               | ROC AUC  | Recall   | Precision | Accuracy |
+| ------------------- | -------- | -------- | --------- | -------- |
+| Logistic Regression | 0.64     | 0.59     | 0.11      | 0.61     |
+| Random Forest       | 0.79     | 0.20     | 0.83      | 0.93     |
+| **XGBoost (Best)**  | **0.78** | **0.66** | 0.19      | 0.75     |
 
 
-Key Insights:
+👉 XGBoost selected for best trade-off between recall (capturing late orders) and generalizability.
 
-Only ~9% of orders are late → strong class imbalance.
+📊 Key Insights
 
-High-demand months show spikes in delays.
+Late deliveries = ~9% of orders → strong class imbalance.
 
-Cross-state & long-distance orders are more likely delayed.
+High-demand months → spikes in delays.
 
-Surprisingly, holiday/weekend orders perform slightly better.
+Long distances & cross-state shipments more likely to be late.
+
+Surprisingly, holiday/weekend orders had slightly fewer delays.
 
 Strongest predictor: given_to_carrier_after_estimated flag.
 
+✅ Business Value
 
-Conclusion:
+Proactively flag risky shipments in the order pipeline.
 
-This solution provides a scalable, data-driven method to identify delivery risks in e-commerce.
+Improve logistics decisions (rerouting, prioritization).
 
-XGBoost outperforms other models by capturing complex interactions.
+Enhance customer communication by predicting delays early.
 
-Businesses can proactively flag risky shipments, reroute logistics, and notify customers early.
+🔮 Future Work
 
+Integrate real-time traffic, weather, courier capacity.
 
-Future Work:
+Collect warehouse handover times & courier performance metrics.
 
-Integrate real-time data: traffic, weather, courier capacity.
+Experiment with deep learning / ensemble methods.
 
-Add courier performance metrics and warehouse handling times.
+Add explainability tools (SHAP, LIME) for business insights.
 
-Explore deep learning or ensemble methods.
+🛠️ Tech Stack
 
-Use SHAP/LIME for interpretability in production.
+Python: pandas, numpy, scikit-learn, xgboost
 
+Visualization: matplotlib, seaborn
 
-Tech Stack:
+Geospatial: geopy (Haversine formula)
 
-Python (pandas, numpy, scikit-learn, xgboost)
-
-Data viz: matplotlib, seaborn
-
-Geospatial: geopy (Haversine distance)
-
-EDA & preprocessing: StandardScaler, feature engineering
+ML Pipeline: feature engineering, cross-validation, model evaluation
